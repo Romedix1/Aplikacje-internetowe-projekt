@@ -25,3 +25,8 @@ Route::get('/', function () {
     }
     return redirect()->route('login');
 });
+
+Route::middleware(['auth', 'staff'])->group(function () {
+    Route::get('/panel-pracownika', [LoanController::class, 'staffIndex'])->name('staff.loans');
+    Route::post('/zwrot/{id}', [LoanController::class, 'returnBook'])->name('loans.return');
+});

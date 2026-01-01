@@ -20,6 +20,10 @@
                                 <a href="{{ route('books.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('books.index') ? 'border-indigo-500 text-white' : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-300' }} text-sm font-medium transition duration-150 ease-in-out">Katalog</a>
 
                                 <a href="{{ route('loans.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('loans.index') ? 'border-indigo-500 text-white' : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-300' }} text-sm font-medium transition duration-150 ease-in-out">Moje Książki</a>
+
+                                @if(Auth::user()->role === 'admin' || Auth::user()->role === 'librarian')
+                                    <a href="{{ route('staff.loans') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('staff.loans') ? 'border-red-500 text-white' : 'border-transparent text-red-400 hover:text-red-200' }} text-sm font-bold transition duration-150 ease-in-out ml-4">Panel Pracownika</a>
+                                @endif
                             </div>
                         </div>
 

@@ -38,4 +38,22 @@ class LoanController extends Controller
 
         return view('loans.index', compact('loans'));
     }
+
+    public function staffIndex()
+    {
+        $activeLoans = Loan::whereNull('returned_at')->with(['user', 'bookCopy.book'])->orderBy('due_at', 'asc')->get();
+
+        return view('staff.loans', compact('activeLoans'));
+    }
+
+    public function returnBook(Request $request, $id)
+    {
+        $loan = Loan::findOrFail($id);
+
+        $loan->update(['returned_at' => now()]);
+
+        $loan->bookCopy->update(['status' => 'available']);
+
+        return back()->with('success', 'Książka została zwrócona');
+    }
 }
