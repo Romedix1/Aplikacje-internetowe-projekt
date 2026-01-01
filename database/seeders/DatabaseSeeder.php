@@ -2,14 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use App\Models\Book;
+use App\Models\BookCopy;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
@@ -18,8 +17,25 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin Biblioteki',
+            'email' => 'admin@biblioteka.pl',
+            'password' => bcrypt('haslo123'),
+            'role' => 'admin',
         ]);
+
+        User::factory(10)->create();
+
+        $books = Book::factory(50)->create();
+
+        foreach ($books as $book) {
+            $numberOfCopies = rand(1, 5);
+
+            for ($i = 0; $i < $numberOfCopies; $i++) {
+                BookCopy::factory()->create([
+                    'book_id' => $book->id,
+                    'inventory_number' => 'INV-' . uniqid(true)
+                ]);
+            }
+        }
     }
 }
