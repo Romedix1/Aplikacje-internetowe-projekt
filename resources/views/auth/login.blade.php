@@ -39,6 +39,7 @@
             </form>
 
             <p class="mt-6 text-center text-xs text-gray-500">Dane testowe admina: admin@biblioteka.pl / haslo123</p>
+            <p class="mt-6 text-center text-xs text-gray-500">Dane testowe użytkownika: user@biblioteka.pl / haslo123</p>
         </main>
     </body>
 </html>

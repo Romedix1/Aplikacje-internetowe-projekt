@@ -23,6 +23,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
+        User::factory()->create([
+            'name' => 'Jan Kowalski',
+            'email' => 'user@biblioteka.pl',
+            'password' => bcrypt('haslo123'),
+            'role' => 'user',
+        ]);
+
         User::factory(10)->create();
 
         $books = Book::factory(50)->create();
