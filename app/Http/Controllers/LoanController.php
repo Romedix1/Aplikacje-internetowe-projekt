@@ -31,4 +31,11 @@ class LoanController extends Controller
 
         return back()->with('success', 'Książka została wypożyczona');
     }
+
+    public function index()
+    {
+        $loans = Loan::where('user_id', Auth::id())->whereNull('returned_at')->with('bookCopy.book')->orderBy('due_at', 'asc')->get();
+
+        return view('loans.index', compact('loans'));
+    }
 }

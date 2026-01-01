@@ -17,7 +17,9 @@
                             </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <a href="{{ route('books.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium text-white">Katalog</a>
+                                <a href="{{ route('books.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('books.index') ? 'border-indigo-500 text-white' : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-300' }} text-sm font-medium transition duration-150 ease-in-out">Katalog</a>
+
+                                <a href="{{ route('loans.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('loans.index') ? 'border-indigo-500 text-white' : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-300' }} text-sm font-medium transition duration-150 ease-in-out">Moje Książki</a>
                             </div>
                         </div>
 

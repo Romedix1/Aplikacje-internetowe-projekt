@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/katalog', [BookController::class, 'index'])->name('books.index');
     Route::get('/ksiazka/{id}', [BookController::class, 'show'])->name('books.show');
     Route::post('/wypozycz', [LoanController::class, 'store'])->name('loans.store');
+    Route::get('/moje-ksiazki', [LoanController::class, 'index'])->name('loans.index');
 });
 
 Route::get('/', function () {
