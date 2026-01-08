@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        {{ $book->title }}
+        <h1>{{ $book->title }}</h1>
     </x-slot>
 
     <div class="py-12">
@@ -10,7 +10,7 @@
                     <div class="bg-gray-800 border border-gray-700 shadow sm:rounded-lg p-6">
                         <div class="w-full h-64 bg-gray-700 rounded mb-6 flex items-center justify-center text-gray-500">Brak Okładki</div>
 
-                        <h3 class="text-xl font-bold text-white mb-2">{{ $book->title }}</h3>
+                        <h2 class="text-xl font-bold text-white mb-2">{{ $book->title }}</h2>
                         <p class="text-indigo-400 font-semibold mb-4">{{ $book->author->first_name }} {{ $book->author->last_name }}</p>
 
                         <div class="space-y-2 text-sm text-gray-300">
@@ -24,12 +24,12 @@
 
                 <div class="md:col-span-2 space-y-6">
                     <div class="bg-gray-800 border border-gray-700 shadow sm:rounded-lg p-6">
-                        <h4 class="text-lg font-bold text-white mb-4">Opis</h4>
+                        <h3 class="text-lg font-bold text-white mb-4">Opis</h3>
                         <p class="text-gray-300 leading-relaxed">{{ $book->description }}</p>
                     </div>
 
                     <div class="bg-gray-800 border border-gray-700 shadow sm:rounded-lg p-6">
-                        <h4 class="text-lg font-bold text-white mb-4">Dostępne Egzemplarze</h4>
+                        <h3 class="text-lg font-bold text-white mb-4">Dostępne Egzemplarze</h3>
 
                         @if($book->copies->isEmpty())
                             <p class="text-yellow-500">Brak egzemplarzy w bibliotece.</p>
@@ -61,9 +61,7 @@
                                                     <form method="POST" action="{{ route('loans.store') }}">
                                                             @csrf
                                                             <input type="hidden" name="book_copy_id" value="{{ $copy->id }}">
-                                                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded text-xs transition duration-200 shadow hover:shadow-lg">
-                                                                Wypożycz
-                                                            </button>
+                                                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded text-xs transition duration-200 shadow hover:shadow-lg">Wypożycz</button>
                                                         </form>
                                                     @else
                                                         <span class="text-gray-600 cursor-not-allowed">Niedostępna</span>

@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Panel Pracownika - Aktywne Wypożyczenia
+        <h1>Panel Pracownika - Aktywne Wypożyczenia</h1>
     </x-slot>
 
     <div class="py-12">

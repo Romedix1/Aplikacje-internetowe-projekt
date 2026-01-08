@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        Moje Wypożyczenia
+        <h1>Moje Wypożyczenia</h1>
     </x-slot>
 
     <div class="py-12">
