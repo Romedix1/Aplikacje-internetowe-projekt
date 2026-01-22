@@ -5,6 +5,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Logowanie - Biblioteka</title>
         <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            html.font-size-medium { font-size: 115% !important; }
+            html.font-size-large { font-size: 130% !important; }
+
+            .wcag-contrast,
+            .wcag-contrast body,
+            .wcag-contrast main,
+            .wcag-contrast div:not(.fixed) {
+                background-color: #000000 !important;
+                color: #FFFF00 !important;
+                border-color: #FFFF00 !important;
+            }
+
+            .wcag-contrast h1,
+            .wcag-contrast label,
+            .wcag-contrast p,
+            .wcag-contrast li {
+                color: #FFFF00 !important;
+            }
+
+            .wcag-contrast input {
+                background-color: #000000 !important;
+                color: #FFFF00 !important;
+                border: 2px solid #FFFF00 !important;
+            }
+
+            .wcag-contrast button:not([onclick]) {
+                background-color: #FFFF00 !important;
+                color: #000000 !important;
+                border: 2px solid #FFFF00 !important;
+                font-weight: bold !important;
+            }
+
+            .wcag-contrast .bg-red-900\/50 {
+                background-color: #000000 !important;
+                border: 2px solid #FFFF00 !important;
+            }
+        </style>
     </head>
     <body class="bg-gray-900 flex items-center justify-center min-h-screen text-gray-100">
         <main class="w-full max-w-md bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700">
@@ -41,5 +79,49 @@
             <p class="mt-6 text-center text-xs text-gray-500">Dane testowe admina: admin@biblioteka.pl / haslo123</p>
             <p class="mt-6 text-center text-xs text-gray-500">Dane testowe użytkownika: user@biblioteka.pl / haslo123</p>
         </main>
+
+        <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 p-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+            <button onclick="toggleContrast()" class="p-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 text-gray-900 dark:text-gray-100 rounded text-sm font-bold border border-gray-400" title="Wysoki Kontrast">
+                Kontrast
+            </button>
+
+            <div class="flex gap-1">
+                <button onclick="changeFontSize('normal')" class="flex-1 p-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 text-gray-900 dark:text-gray-100 rounded text-xs font-bold border border-gray-400" title="Normalna czcionka">A</button>
+                <button onclick="changeFontSize('medium')" class="flex-1 p-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 text-gray-900 dark:text-gray-100 rounded text-sm font-bold border border-gray-400" title="Średnia czcionka">A+</button>
+                <button onclick="changeFontSize('large')" class="flex-1 p-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 text-gray-900 dark:text-gray-100 rounded text-lg font-bold border border-gray-400" title="Duża czcionka">A++</button>
+            </div>
+        </div>
+
+        <script>
+            function toggleContrast() {
+                const html = document.documentElement;
+                html.classList.toggle('wcag-contrast');
+                if (html.classList.contains('wcag-contrast')) {
+                    localStorage.setItem('contrast', 'high');
+                } else {
+                    localStorage.removeItem('contrast');
+                }
+            }
+
+            function changeFontSize(size) {
+                const html = document.documentElement;
+                html.classList.remove('font-size-medium', 'font-size-large');
+                if (size === 'medium') {
+                    html.classList.add('font-size-medium');
+                    localStorage.setItem('fontSize', 'medium');
+                } else if (size === 'large') {
+                    html.classList.add('font-size-large');
+                    localStorage.setItem('fontSize', 'large');
+                } else {
+                    localStorage.removeItem('fontSize');
+                }
+            }
+
+            (function() {
+                if (localStorage.getItem('contrast') === 'high') document.documentElement.classList.add('wcag-contrast');
+                const savedSize = localStorage.getItem('fontSize');
+                if (savedSize) document.documentElement.classList.add('font-size-' + savedSize);
+            })();
+        </script>
     </body>
 </html>
